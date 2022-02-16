@@ -36,9 +36,10 @@ def save_pdf(name, data):
 # End of func.
 
 def save_text(name, text):
-    with open(name + '.txt', 'rw') as userinfo:
+    with open(name + '.txt', 'w') as userinfo:
+        userinfo.write('PERSONAL COVID DATA SHEET\n')
         for txt in text:
-            userinfo.write(text + '\n')
+            userinfo.write(txt + '\n')
     print('SAVED AS TXT!')
 # End of func.
 
