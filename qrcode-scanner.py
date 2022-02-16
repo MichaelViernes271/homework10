@@ -34,7 +34,14 @@ def save_pdf(name, data):
     
     print('PDF SAVED!')
 # End of func.
-    
+
+def save_text(name, text):
+    with open(name + '.txt', 'rw') as userinfo:
+        for txt in text:
+            userinfo.write(text + '\n')
+    print('SAVED AS TXT!')
+# End of func.
+
 # Captures the qrcode and saves data to pdf.    
 def scan_qrcode():
     qrcode = cv2.VideoCapture(0, cv2.CAP_DSHOW)
@@ -57,8 +64,9 @@ def scan_qrcode():
             print(userinfo)
             userinfo = userinfo.split('\n')
             print('\n\n')
-            pdf = input('Name saved data: ')
-            save_pdf(str(pdf), userinfo)
+            name = input('Name saved data: ')
+            save_text(name, userinfo)
+            save_pdf(name, userinfo)
             time.sleep(3)
             cam = False
             
