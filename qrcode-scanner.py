@@ -21,10 +21,12 @@ def save_pdf(name, data):
     
     # Set title.
     pdf.set_font('times', 'B', 16)
+    pdf.set_text_color(100,100,255)
     pdf.cell(20, 1, 'CONTACT TRACING SHEET', ln=1, border=1)
     
     # Set user data.
     pdf.set_font('times', '', 12)
+    pdf.set_text_color(0,0,0)
     for u_data in data:
         pdf.cell(0, 1, u_data, ln=1)
     name = name.upper() + ".pdf"
@@ -44,11 +46,17 @@ def scan_qrcode():
         success, frame = qrcode.read() # not needed success variable 
         
         for user_data in decode(frame):
-            print("DECODED SUCCESSFULLY")
+            print("""
+            =====================
+            SCANNED SUCCESSFULLY!
+            =====================
+            
+            """)
             userinfo = user_data.data.decode('utf-8')
-            print('Type of Code: ', user_data.type,'\n')
+            print('Type of Code: ', user_data.type,'\n')    
             print(userinfo)
             userinfo = userinfo.split('\n')
+            print('\n\n')
             pdf = input('Name saved data: ')
             save_pdf(str(pdf), userinfo)
             time.sleep(3)
