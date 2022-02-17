@@ -44,10 +44,10 @@ def save_pdf(name, data):
 
 def save_text(name, text):
     cdt = datetime.datetime.now()
-    cdt.strftime('%b %d %Y | %I %M %S')
+    cdt = cdt.strftime('%b. %d, %Y | %I:%M:%S %p')
     with open(name + '.txt', 'w') as userinfo:
         userinfo.write('PERSONAL COVID DATA SHEET\n')
-        userinfo.write('Date & Time transcripted: ' + str(cdt))
+        userinfo.write('Date & Time transcripted: ' + str(cdt) + '\n\n')
         userinfo.write('')
         for txt in text:
             userinfo.write(txt + '\n')
