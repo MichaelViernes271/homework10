@@ -6,6 +6,7 @@
 
 from fpdf import FPDF
 import time
+import datetime
 import cv2
 from pyzbar.pyzbar import decode
 
@@ -22,7 +23,13 @@ def save_pdf(name, data):
     # Set title.
     pdf.set_font('times', 'B', 16)
     pdf.set_text_color(100,100,255)
-    pdf.cell(20, 1, 'CONTACT TRACING SHEET', ln=1, border=1)
+    pdf.set_fill_color(125,255,255)
+    pdf.cell(0, 1, 'CONTACT TRACING SHEET', ln=1, border=1)
+    
+    # Sets time and date contracted.
+    cdt = datetime.datetime.now()
+    cdt.strftime('%b %d %Y | %I %M %S')
+    pdf.cell(0, 1, str(cdt), ln=1)
     
     # Set user data.
     pdf.set_font('times', '', 12)
@@ -36,8 +43,12 @@ def save_pdf(name, data):
 # End of func.
 
 def save_text(name, text):
+    cdt = datetime.datetime.now()
+    cdt.strftime('%b %d %Y | %I %M %S')
     with open(name + '.txt', 'w') as userinfo:
         userinfo.write('PERSONAL COVID DATA SHEET\n')
+        userinfo.write('Date & Time transcripted: ' + str(cdt))
+        userinfo.write('')
         for txt in text:
             userinfo.write(txt + '\n')
     print('SAVED AS TXT!')
